@@ -3,11 +3,6 @@
 
 #include "../CommandBase.h"
 
-/**
- *
- *
- * @author StopAuthor
- */
 class StopCommand: public CommandBase {
 public:
     StopCommand();

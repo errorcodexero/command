@@ -9,15 +9,14 @@ CommandBase::CommandBase(const char *name) : Command(name) {
 CommandBase::CommandBase() : Command() {
 }
 
-// Initialize a single static instance of all of your subsystems to NULL
-OI* CommandBase::oi = NULL;
-Joystick* CommandBase::joystick = NULL;
-DriveBase* CommandBase::driveBase = NULL;
+// Initialize static pointers to each of your subsystems.
+OI *CommandBase::c_oi = NULL;
+DriveBase *CommandBase::c_driveBase = NULL;
 
 void CommandBase::init() {
-    // Create a single static instance of all of your subsystems. The following
-    // line should be repeated for each subsystem in the project.
-    oi = new OI();
-    joystick = new Joystick(1);
-    driveBase = new DriveBase();
+    // Create a single static instance of each of your subsystems.
+    // The following lines should be repeated for each subsystem
+    // in the project.
+    if (!oi) { c_oi = new OI(); }
+    if (!driveBase) { c_driveBase = new DriveBase(); }
 }

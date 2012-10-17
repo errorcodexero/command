@@ -4,11 +4,6 @@
 #include "WPILib.h"
 #include "Commands/Subsystem.h"
 
-/**
- *
- *
- * @author ExampleAuthor
- */
 class DriveBase: public Subsystem
 {
 private:
@@ -16,11 +11,15 @@ private:
     CANJaguar motorRR;
     CANJaguar motorLF;
     CANJaguar motorRF;
+
     RobotDrive drive;
-    static void DisableMotor(CANJaguar& motor);
-    static void EnableVoltageControl(CANJaguar& motor);
-    static void EnableSpeedControl(CANJaguar& motor, double p, double i, double d);
-    static void EnablePositionControl(CANJaguar& motor, double p, double i, double d);
+
+    static void DisableMotor( CANJaguar& motor );
+    static void EnableVoltageControl( CANJaguar& motor );
+    static void EnableSpeedControl( CANJaguar& motor,
+    			double p, double i, double d );
+    static void EnablePositionControl( CANJaguar& motor,
+    			double p, double i, double d );
     unsigned long m_driveTime;
 
 public:
@@ -32,7 +31,7 @@ public:
     void EnableSpeedControl();
     void EnablePositionControl();
     
-    void DriveCartesian(float x, float y, float rotation);
+    void DriveCartesian( float x, float y, float rotation );
 };
 
 #endif

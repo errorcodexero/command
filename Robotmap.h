@@ -1,22 +1,19 @@
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 
+// The RobotMap is a mapping from the ports sensors and actuators are wired
+// into to a named constant. This provides flexibility when changing wiring,
+// makes checking the wiring easier and significantly reduces the number of
+// magic numbers floating around.
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
+// OI Joysticks
+#define	DRIVER_STICK	1
+#define	GUNNER_STICK	2
  
-// For example to map the left and right motors, you could define the
-// following variables to use with your drivetrain subsystem.
-// #define LEFTMOTOR 1
-// #define RIGHTMOTOR 2
-
-// If you are using multiple modules, make sure to define both the port
-// number and the module. For example you with a rangefinder:
-// #define RANGE_FINDER_PORT 1
-// #define RANGE_FINDER_MODULE 1
+// DriveBase motors (CAN controller channel numbers)
+#define CAN_LEFT_REAR	5
+#define CAN_RIGHT_REAR	9
+#define	CAN_LEFT_FRONT	8
+#define	CAN_RIGHT_FRONT	7
 
 #endif

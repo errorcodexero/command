@@ -3,11 +3,6 @@
 
 #include "../CommandBase.h"
 
-/**
- *
- *
- * @author DriveAuthor
- */
 class DriveCommand: public CommandBase {
 public:
     DriveCommand();
