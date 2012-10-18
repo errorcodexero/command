@@ -1,5 +1,6 @@
 #include "DriveBase.h"
 #include "../Robotmap.h"
+#include "../Commands/StopCommand.h"
 
 // the following could go in Robotmap.h
 
@@ -33,7 +34,7 @@ DriveBase::DriveBase() : Subsystem("DriveBase"),
     
 void DriveBase::InitDefaultCommand()
 {
-    // SetDefaultCommand(new Stop());
+    SetDefaultCommand(new StopCommand());
 }
 
 // Put methods for controlling this subsystem
@@ -56,9 +57,57 @@ void DriveBase::DisableMotors()
     DisableMotor( motorRR );		// RobotDrive *should* do this as well
 }
 
-void DriveBase::EnableVoltageControl( CANJaguar& motor )
+void DriveBase::EnablePercentVbusControl( CANJaguar& motor )
 {
     motor.ChangeControlMode( CANJaguar::kPercentVbus );
+    motor.ConfigMaxOutputVoltage( 13.2 );
+    motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Coast );
+
+    // force change in control mode
+    motor.EnableControl();
+
+    // Feed the watchdog now to avoid a race condition when enabling
+    //   motorSafetyHelper with the previous timer already expired.
+    motor.Set( 0.0F, 0 );
+
+    // Now it's safe to enable.
+    motor.SetSafetyEnabled( true );
+
+    // Set the timer a little longer than default
+    //   to allow for CAN timeouts and retries.
+    motor.SetExpiration( 0.5 );
+
+    // Feed the watchdog again with the new interval.
+    motor.Set( 0.0F, 0 );
+}
+
+void DriveBase::EnablePercentVbusControl()
+{
+    EnablePercentVbusControl( motorLR );
+    EnablePercentVbusControl( motorRF );
+    EnablePercentVbusControl( motorLF );
+    EnablePercentVbusControl( motorRR );
+
+    drive.SetMaxOutput( 1.0 );	// 100% of Vbus
+
+    // Feed the watchdog now to avoid a race condition when enabling
+    //   motorSafetyHelper with the previous timer already expired.
+    drive.SetLeftRightMotorOutputs( 0.0F, 0.0F );
+
+    // Now it's safe to enable.
+    drive.SetSafetyEnabled( true );
+
+    // Set the timer a little longer than default
+    //   to allow for CAN timeouts and retries.
+    drive.SetExpiration( 0.5 );
+
+    // Feed the watchdog again with the new interval.
+    drive.SetLeftRightMotorOutputs( 0.0F, 0.0F );
+}
+
+void DriveBase::EnableVoltageControl( CANJaguar& motor )
+{
+    motor.ChangeControlMode( CANJaguar::kVoltage );
     motor.ConfigMaxOutputVoltage( 13.2 );
     motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Coast );
 
@@ -87,7 +136,8 @@ void DriveBase::EnableVoltageControl()
     EnableVoltageControl( motorLF );
     EnableVoltageControl( motorRR );
 
-    drive.SetMaxOutput( 1.0 );	// 100% of Vbus
+    drive.SetMaxOutput( 8.0 );	// 8.0 volts for consistent results
+    				// with low battery
 
     // Feed the watchdog now to avoid a race condition when enabling
     //   motorSafetyHelper with the previous timer already expired.
@@ -197,5 +247,11 @@ void DriveBase::EnablePositionControl()
 
     // Start the timer
     m_driveTime = GetFPGATime();
+}
+
+
+void DriveBase::DriveCartesian( float x, float y, float t )
+{
+    drive.MecanumDrive_Cartesian( x, y, t );
 }
 

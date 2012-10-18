@@ -4,21 +4,22 @@ DriveCommand::DriveCommand()
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
-    Requires(&oi());
-    Requires(&driveBase());
+    Requires(&theOI());
+    Requires(&theDriveBase());
 }
 
 // Called just before this Command runs the first time
 void DriveCommand::Initialize()
 {
-    driveBase().EnableVoltageControl();
+    theDriveBase().EnablePercentVbusControl();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-    driveBase().DriveCartesian( oi().GetDriverX(), oi().GetDriverY(),
-    				oi().GetDriverTwist() );
+    theDriveBase().DriveCartesian( theOI().GetDriverX(),
+				   theOI().GetDriverY(),
+				   theOI().GetDriverTwist() );
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +31,7 @@ bool DriveCommand::IsFinished()
 // Called once after isFinished returns true
 void DriveCommand::End()
 {
-    driveBase().DisableMotors();
+    theDriveBase().DisableMotors();
 }
 
 // Called when another command which requires one or more of the same

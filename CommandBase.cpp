@@ -3,20 +3,23 @@
 #include "CommandBase.h"
 #include "Subsystems/DriveBase.h"
 
-CommandBase::CommandBase(const char *name) : Command(name) {
+CommandBase::CommandBase( const char *name ) : Command( name )
+{
 }
 
-CommandBase::CommandBase() : Command() {
+CommandBase::CommandBase() : Command()
+{
 }
 
-// Initialize static pointers to each of your subsystems.
-OI *CommandBase::c_oi = NULL;
-DriveBase *CommandBase::c_driveBase = NULL;
+// Create and return singleton instances of each of your subsystems.
+OI& CommandBase::theOI()
+{
+    static OI oi;
+    return oi;
+}
 
-void CommandBase::init() {
-    // Create a single static instance of each of your subsystems.
-    // The following lines should be repeated for each subsystem
-    // in the project.
-    if (!oi) { c_oi = new OI(); }
-    if (!driveBase) { c_driveBase = new DriveBase(); }
+DriveBase& CommandBase::theDriveBase()
+{
+    static DriveBase driveBase;
+    return driveBase;
 }

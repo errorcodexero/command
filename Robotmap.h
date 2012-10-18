@@ -16,4 +16,8 @@
 #define	CAN_LEFT_FRONT	8
 #define	CAN_RIGHT_FRONT	7
 
+// Compressor
+#define	COMPRESSOR_SWITCH	1	// digital input - pressure switch
+#define	COMPRESSOR_RELAY	1	// relay (Spike) output - compressor 
+
 #endif

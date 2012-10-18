@@ -15,6 +15,7 @@ private:
     RobotDrive drive;
 
     static void DisableMotor( CANJaguar& motor );
+    static void EnablePercentVbusControl( CANJaguar& motor );
     static void EnableVoltageControl( CANJaguar& motor );
     static void EnableSpeedControl( CANJaguar& motor,
     			double p, double i, double d );
@@ -27,6 +28,7 @@ public:
     void InitDefaultCommand();
      
     void DisableMotors();
+    void EnablePercentVbusControl();
     void EnableVoltageControl();
     void EnableSpeedControl();
     void EnablePositionControl();
