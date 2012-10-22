@@ -1,6 +1,8 @@
 #include "TimedDrive.h"
 
-TimedDrive::TimedDrive() : m_timer()
+TimedDrive::TimedDrive() :
+    CommandBase("TimedDrive"),
+    m_timer()
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);

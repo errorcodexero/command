@@ -11,11 +11,13 @@ class CommandBasedRobot : public IterativeRobot {
 private:
 	Compressor *m_compressor;
 	Command *m_autonomousCommand;
+	Command *m_teleopCommand;
 
 	virtual void RobotInit() {
 		m_compressor = new Compressor( COMPRESSOR_SWITCH, COMPRESSOR_RELAY );
 		m_compressor->Start();
 		m_autonomousCommand = new AutonomousCommand();
+		m_teleopCommand = new DriveCommand();
 	}
 	
 	virtual void AutonomousInit() {
@@ -27,11 +29,7 @@ private:
 	}
 	
 	virtual void TeleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to 
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		m_autonomousCommand->Cancel();
+		m_teleopCommand->Start();
 	}
 	
 	virtual void TeleopPeriodic() {

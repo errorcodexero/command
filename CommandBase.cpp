@@ -2,6 +2,7 @@
 #include <Commands/Scheduler.h>
 #include "CommandBase.h"
 #include "Subsystems/DriveBase.h"
+#include "Subsystems/BlinkyLight.h"
 
 CommandBase::CommandBase( const char *name ) : Command( name )
 {
@@ -22,4 +23,10 @@ DriveBase& CommandBase::theDriveBase()
 {
     static DriveBase driveBase;
     return driveBase;
+}
+
+BlinkyLight& CommandBase::theBlinkyLight()
+{
+    static BlinkyLight blinkyLight;
+    return blinkyLight;
 }

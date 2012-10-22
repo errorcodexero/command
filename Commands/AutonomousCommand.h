@@ -16,6 +16,7 @@
 class AutonomousCommand: public CommandGroup {
 public:	
 	AutonomousCommand();
+	void Interrupted();
 };
 
 #endif

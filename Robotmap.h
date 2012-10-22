@@ -20,4 +20,7 @@
 #define	COMPRESSOR_SWITCH	1	// digital input - pressure switch
 #define	COMPRESSOR_RELAY	1	// relay (Spike) output - compressor 
 
+// Blinky
+#define	BLINKY_PWM		1	// Victor to control blinky light
+
 #endif

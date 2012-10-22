@@ -4,6 +4,7 @@
 #include <Commands/Command.h>
 #include "Subsystems/OI.h"
 #include "Subsystems/DriveBase.h"
+#include "Subsystems/BlinkyLight.h"
 
 // CommandBase is the base for all commands.
 // Atomic commands should subclass CommandBase.
@@ -23,6 +24,7 @@ public:
     // Return references to singleton instances of each of your subsystems.
     static OI &theOI();
     static DriveBase &theDriveBase();
+    static BlinkyLight &theBlinkyLight();
 };
 
 #endif

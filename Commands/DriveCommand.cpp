@@ -1,6 +1,7 @@
 #include "DriveCommand.h"
 
-DriveCommand::DriveCommand()
+DriveCommand::DriveCommand() :
+    CommandBase("DriveCommand")
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
