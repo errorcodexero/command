@@ -13,11 +13,11 @@ AutonomousCommand::AutonomousCommand() :
     Requires(&CommandBase::theBlinkyLight());
 
     AddSequential(new BlinkyOn());
-    AddSequential(new TimedDrive( 0.0, 6.5, 0.0, 3.0 ));
+    AddSequential(new TimedDrive( 0.0, 4.0, 0.0, 0.5 ));
     AddSequential(new BlinkyOff());
-    AddSequential(new WaitCommand(0.5));
+    AddSequential(new WaitCommand(0.2));
     AddSequential(new BlinkyOn());
-    AddSequential(new TimedDrive( 6.5, 0.0, 0.0, 2.5 ));
+    AddSequential(new TimedDrive( 4.0, 0.0, 0.0, 0.5 ));
     AddSequential(new BlinkyOff());
     AddSequential(new WaitCommand(2.0));
     AddSequential(new BlinkyBreathe(8.0));
