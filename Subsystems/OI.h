@@ -5,13 +5,13 @@
 #define _OI_H_
 
 #include <WPILib.h>
-#include "Commands/Subsystem.h"
+#include "../Smart/Smart.h"
 
 class OI : public Subsystem
 {
 private:
     DriverStationEnhancedIO *pIO;
-    Joystick driverStick, gunnerStick;
+    SmartJoystick driverStick, gunnerStick;
 
 public:
     OI();

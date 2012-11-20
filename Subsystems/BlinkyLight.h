@@ -1,8 +1,7 @@
 #ifndef BLINKY_LIGHT_H
 #define BLINKY_LIGHT_H
 
-#include "WPILib.h"
-#include "Commands/Subsystem.h"
+#include <WPILib.h>
 
 class BlinkyLight: public Subsystem
 {

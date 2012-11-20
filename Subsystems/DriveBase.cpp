@@ -23,10 +23,10 @@
 #define	TURN_TOLERANCE	0.35
 
 DriveBase::DriveBase() : Subsystem("DriveBase"),
-    motorLR( CAN_LEFT_REAR   ),
-    motorRR( CAN_RIGHT_REAR  ),
-    motorLF( CAN_LEFT_FRONT  ),
-    motorRF( CAN_RIGHT_FRONT ),
+    motorLR( CAN_LEFT_REAR,   "LR" ),
+    motorRR( CAN_RIGHT_REAR,  "RR" ),
+    motorLF( CAN_LEFT_FRONT,  "LF" ),
+    motorRF( CAN_RIGHT_FRONT, "RF" ),
     drive(motorLF, motorLR, motorRF, motorRR)
 {
     ;

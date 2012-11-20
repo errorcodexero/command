@@ -1,5 +1,5 @@
-#include "../Robotmap.h"
 #include "BlinkyLight.h"
+#include "../Robotmap.h"
 #include "../Commands/BlinkyOff.h"
 
 BlinkyLight::BlinkyLight() :

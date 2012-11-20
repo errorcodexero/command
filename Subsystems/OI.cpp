@@ -6,8 +6,8 @@
 
 OI::OI() : Subsystem("OI"),
 	pIO(NULL),
-	driverStick(DRIVER_STICK),
-	gunnerStick(GUNNER_STICK)
+	driverStick(DRIVER_STICK, "driver"),
+	gunnerStick(GUNNER_STICK, "gunner")
 {
      DriverStation *pDS = DriverStation::GetInstance();
      pIO = &pDS->GetEnhancedIO();

@@ -1,16 +1,16 @@
 #ifndef DRIVE_BASE_H
 #define DRIVE_BASE_H
 
-#include "WPILib.h"
-#include "Commands/Subsystem.h"
+#include <WPILib.h>
+#include "../Smart/Smart.h"
 
 class DriveBase: public Subsystem
 {
 private:
-    CANJaguar motorLR;
-    CANJaguar motorRR;
-    CANJaguar motorLF;
-    CANJaguar motorRF;
+    SmartCANJaguar motorLR;
+    SmartCANJaguar motorRR;
+    SmartCANJaguar motorLF;
+    SmartCANJaguar motorRF;
 
     RobotDrive drive;
 
