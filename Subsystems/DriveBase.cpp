@@ -19,7 +19,7 @@
 #define	MAX_OUTPUT	8.
 
 #define	DRIVE_TOLERANCE	0.50
-
+	
 #define	TURN_TOLERANCE	0.35
 
 DriveBase::DriveBase() : Subsystem("DriveBase"),
@@ -29,7 +29,8 @@ DriveBase::DriveBase() : Subsystem("DriveBase"),
     motorRF( CAN_RIGHT_FRONT ),
     drive(motorLF, motorLR, motorRF, motorRR)
 {
-    ;
+	drive.SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
+	drive.SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 }
     
 void DriveBase::InitDefaultCommand()
@@ -252,6 +253,9 @@ void DriveBase::EnablePositionControl()
 
 void DriveBase::DriveCartesian( float x, float y, float t )
 {
+	SmartDashboard::Log(x,"JoyX");
+	SmartDashboard::Log(y,"JoyY");
+	SmartDashboard::Log(t,"JoyT");
     drive.MecanumDrive_Cartesian( x, y, t );
 }
 
