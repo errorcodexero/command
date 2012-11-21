@@ -29,7 +29,8 @@ DriveBase::DriveBase() : Subsystem("DriveBase"),
     motorRF( CAN_RIGHT_FRONT, "RF" ),
     drive(motorLF, motorLR, motorRF, motorRR)
 {
-    ;
+    drive.SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
+    drive.SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 }
     
 void DriveBase::InitDefaultCommand()
