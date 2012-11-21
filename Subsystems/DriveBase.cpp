@@ -253,6 +253,14 @@ void DriveBase::EnablePositionControl()
 
 void DriveBase::DriveCartesian( float x, float y, float t )
 {
-    drive.MecanumDrive_Cartesian( x, y, t );
+    // Rotate the driving direction 90 degrees to the left
+    // relative to the mecanum wheel axes of the drive base.
+
+    // forward motion (+y) becomes RobotDrive left (-x)
+    // reverse motion (-y) becomes RobotDrive right (+x)
+    // left motion (-x) becomes RobotDrive reverse (+y)
+    // right motion (+x) becomes RobotDrive forward (-y)
+
+    drive.MecanumDrive_Cartesian( -y, -x, t );
 }
 

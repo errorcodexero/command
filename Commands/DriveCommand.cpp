@@ -18,9 +18,26 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
+    // The flight stick output is:
+    // stick-forward -y
+    // stick-reverse +y
+    // stick-right   +x
+    // stick-left    -x
+    // twist-right   +t
+    // twist-left    -t
+
+    // Reorient the axes to match what we want for the
+    // robot platform:
+    // robot-forward  +y
+    // robot-backward -y
+    // robot-right    +x
+    // robot-left     -x
+    // turn-right     -t
+    // turn-left      +t
+
     theDriveBase().DriveCartesian( theOI().GetDriverX(),
-				   theOI().GetDriverY(),
-				   theOI().GetDriverTwist() );
+				   -theOI().GetDriverY(),
+				   -theOI().GetDriverTwist() );
 }
 
 // Make this return true when this Command no longer needs to run execute()
