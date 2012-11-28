@@ -18,9 +18,10 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-    theDriveBase().DriveCartesian( theOI().GetDriverX(),
-				   theOI().GetDriverY(),
-				   theOI().GetDriverTwist() );
+    theDriveBase().DriveCartesian( 
+    					-theOI().GetDriverY(),
+    					theOI().GetDriverX(),
+    					theOI().GetDriverTwist() );
 }
 
 // Make this return true when this Command no longer needs to run execute()

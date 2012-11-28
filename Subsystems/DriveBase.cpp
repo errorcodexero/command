@@ -28,6 +28,7 @@ DriveBase::DriveBase() : Subsystem("DriveBase"),
     motorLF( CAN_LEFT_FRONT  ),
     motorRF( CAN_RIGHT_FRONT ),
     drive(motorLF, motorLR, motorRF, motorRR)
+	//default motor order: drive(motorLF, motorLR, motorRF, motorRR)
 {
 	drive.SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
 	drive.SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
@@ -251,11 +252,11 @@ void DriveBase::EnablePositionControl()
 }
 
 
-void DriveBase::DriveCartesian( float x, float y, float t )
+void DriveBase::DriveCartesian( float fwd, float right, float spin)
 {
-	SmartDashboard::Log(x,"JoyX");
-	SmartDashboard::Log(y,"JoyY");
-	SmartDashboard::Log(t,"JoyT");
-    drive.MecanumDrive_Cartesian( x, y, t );
+	SmartDashboard::Log(-fwd,"JoyX");
+	SmartDashboard::Log(-right,"JoyY");
+	SmartDashboard::Log(spin,"JoyT");
+    drive.MecanumDrive_Cartesian( -fwd, -right, spin );
 }
 
