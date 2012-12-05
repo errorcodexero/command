@@ -5,6 +5,7 @@
 #include "OI.h"
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/BlinkyLight.h"
+#include "Subsystems/BallCollector.h"
 
 // CommandBase is the base for all commands.
 // Atomic commands should subclass CommandBase.
@@ -25,6 +26,7 @@ public:
     static OI &theOI();
     static DriveBase &theDriveBase();
     static BlinkyLight &theBlinkyLight();
+    static BallCollector &theBallCollector();
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include "CommandBase.h"
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/BlinkyLight.h"
+#include "Subsystems/BallCollector.h"
 
 CommandBase::CommandBase( const char *name ) : Command( name )
 {
@@ -29,4 +30,10 @@ BlinkyLight& CommandBase::theBlinkyLight()
 {
     static BlinkyLight blinkyLight;
     return blinkyLight;
+}
+
+BallCollector& CommandBase::theBallCollector()
+{
+    static BallCollector ballCollector;
+    return ballCollector;
 }

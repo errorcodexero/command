@@ -22,5 +22,6 @@
 
 // Blinky
 #define	BLINKY_PWM		1	// Victor to control blinky light
+#define	BALL_COLLECTOR_PWM	2	// Victor to control ball collector
 
 #endif

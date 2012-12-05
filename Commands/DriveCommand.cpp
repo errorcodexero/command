@@ -29,6 +29,9 @@ void DriveCommand::Execute()
     theDriveBase().DriveCartesian( -theOI().GetDriverY() * scale,
 				   theOI().GetDriverX() * scale,
 				   theOI().GetDriverTwist() * scale );
+
+    // do something here with the ball collector controls...
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
