@@ -17,11 +17,11 @@ AutonomousCommand::AutonomousCommand() :
     AddSequential(new BlinkyOff());
     AddSequential(new WaitCommand(0.2));
     AddSequential(new BlinkyOn());
-    AddSequential(new TimedDrive( 0.0, 0.0, 0.35, 0.5 ));
+    AddSequential(new TimedDrive( 0.0, 0.0, -0.35, 0.5 ));
     AddSequential(new BlinkyOff());
     AddSequential(new WaitCommand(0.2));
     AddSequential(new BlinkyOn());
-    AddSequential(new TimedDrive( 0.0, 0.35, 0.0, 3.0 ));
+    AddSequential(new TimedDrive( 0.0, -0.35, 0.0, 3.0 ));
     AddSequential(new BlinkyOff());
     AddSequential(new WaitCommand(2.0));
     AddSequential(new BlinkyBreathe(8.0));
