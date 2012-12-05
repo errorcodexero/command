@@ -33,7 +33,7 @@ public:
     void EnableSpeedControl();
     void EnablePositionControl();
     
-    void DriveCartesian( float x, float y, float rotation );
+    void DriveCartesian( float fwd, float right, float spin);
 };
 
 #endif

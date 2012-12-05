@@ -11,7 +11,7 @@ DriveCommand::DriveCommand() :
 // Called just before this Command runs the first time
 void DriveCommand::Initialize()
 {
-    theDriveBase().EnablePercentVbusControl();
+    theDriveBase().EnableVoltageControl();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -25,18 +25,10 @@ void DriveCommand::Execute()
     // twist-right   +t
     // twist-left    -t
 
-    // Reorient the axes to match what we want for the
-    // robot platform:
-    // robot-forward  +y
-    // robot-backward -y
-    // robot-right    +x
-    // robot-left     -x
-    // turn-right     -t
-    // turn-left      +t
-
-    theDriveBase().DriveCartesian( theOI().GetDriverX(),
-				   -theOI().GetDriverY(),
-				   -theOI().GetDriverTwist() );
+    float scale = (theOI().GetDriverThrottle() + 1.0) / 2.0;
+    theDriveBase().DriveCartesian( -theOI().GetDriverY() * scale,
+				   theOI().GetDriverX() * scale,
+				   theOI().GetDriverTwist() * scale );
 }
 
 // Make this return true when this Command no longer needs to run execute()
