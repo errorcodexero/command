@@ -11,7 +11,7 @@ DriveCommand::DriveCommand() :
 // Called just before this Command runs the first time
 void DriveCommand::Initialize()
 {
-    theDriveBase().EnablePercentVbusControl();
+    theDriveBase().EnableVoltageControl();
 }
 
 // Called repeatedly when this Command is scheduled to run
