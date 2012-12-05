@@ -5,9 +5,8 @@
 #define _OI_H_
 
 #include <WPILib.h>
-#include "Commands/Subsystem.h"
 
-class OI : public Subsystem
+class OI
 {
 private:
     DriverStationEnhancedIO *pIO;

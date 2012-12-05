@@ -2,9 +2,9 @@
 // Steve Tarr - team 1425 mentor
 
 #include "OI.h"
-#include "../Robotmap.h"
+#include "Robotmap.h"
 
-OI::OI() : Subsystem("OI"),
+OI::OI() :
 	pIO(NULL),
 	driverStick(DRIVER_STICK),
 	gunnerStick(GUNNER_STICK)
