@@ -2,7 +2,7 @@
 #define COMMAND_BASE_H
 
 #include <Commands/Command.h>
-#include "Subsystems/OI.h"
+#include "OI.h"
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/BlinkyLight.h"
 
