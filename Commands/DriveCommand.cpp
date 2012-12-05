@@ -17,10 +17,11 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-    theDriveBase().DriveCartesian( 
-    					-theOI().GetDriverY(),
-    					theOI().GetDriverX(),
-    					theOI().GetDriverTwist() );
+    float scale = (theOI().GetDriverThrottle() + 1.0) / 2.0;
+    theDriveBase().DriveCartesian(
+	-theOI().GetDriverY() * scale,
+	theOI().GetDriverX() * scale,
+	theOI().GetDriverTwist() * scale );
 }
 
 // Make this return true when this Command no longer needs to run execute()
