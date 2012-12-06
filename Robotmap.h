@@ -22,6 +22,11 @@
 
 // Blinky
 #define	BLINKY_PWM		1	// Victor to control blinky light
+
+// Ball Collector (motor and roller)
 #define	BALL_COLLECTOR_PWM	2	// Victor to control ball collector
+
+// Ball Tray (pneumatic cylinder and limit switch)
+#define	BALL_TRAY_SOLENOID	1	// energize to raise tray for dumping
 
 #endif

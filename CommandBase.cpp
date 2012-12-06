@@ -5,11 +5,11 @@
 #include "Subsystems/BlinkyLight.h"
 #include "Subsystems/BallCollector.h"
 
-CommandBase::CommandBase( const char *name ) : Command( name )
+CommandBase::CommandBase( const char *name ) : CommandGroup( name )
 {
 }
 
-CommandBase::CommandBase() : Command()
+CommandBase::CommandBase() : CommandGroup()
 {
 }
 
@@ -36,4 +36,10 @@ BallCollector& CommandBase::theBallCollector()
 {
     static BallCollector ballCollector;
     return ballCollector;
+}
+
+BallTray& CommandBase::theBallTray()
+{
+    static BallTray ballTray;
+    return ballTray;
 }

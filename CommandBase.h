@@ -6,18 +6,17 @@
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/BlinkyLight.h"
 #include "Subsystems/BallCollector.h"
+#include "Subsystems/BallTray.h"
 
-// CommandBase is the base for all commands.
-// Atomic commands should subclass CommandBase.
-// Composite commands should subclass CommandGroup,
-// which subclasses CommandBase.
+// CommandBase is the base for all commands.  It is subclassed from
+// CommandGroup (composite commands) and Command (atomic commands).
 //
 // CommandBase creates and stores an instance of each control subsystem.
 // To access a subsystem elsewhere in your code in your code use the public
 // access functions that return a reference to the singleton objects, e.g.
 // CommandBase::theSubsystem().subsystemMethod();
 
-class CommandBase: public Command {
+class CommandBase: public CommandGroup {
 public:
     CommandBase(const char* name);
     CommandBase();
@@ -27,6 +26,7 @@ public:
     static DriveBase &theDriveBase();
     static BlinkyLight &theBlinkyLight();
     static BallCollector &theBallCollector();
+    static BallTray &theBallTray();
 };
 
 #endif

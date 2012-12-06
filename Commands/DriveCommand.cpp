@@ -1,4 +1,6 @@
 #include "DriveCommand.h"
+#include "BallCollectorFwd.h"
+#include "BallCollectorRev.h"
 
 DriveCommand::DriveCommand() :
     CommandBase("DriveCommand")
@@ -6,6 +8,8 @@ DriveCommand::DriveCommand() :
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
     Requires(&theDriveBase());
+    Requires(&theBallTray());
+    Requires(&theBallCollector());
 }
 
 // Called just before this Command runs the first time
@@ -32,6 +36,13 @@ void DriveCommand::Execute()
 
     // do something here with the ball collector controls...
 
+    if (theOI().GetDriverTrigger()) {
+    	theBallTray().Raise();
+    	AddParallel(new BallCollectorRev());
+    } else {
+    	theBallTray().Lower();
+    	AddParallel(new BallCollectorFwd());
+    }
 }
 
 // Make this return true when this Command no longer needs to run execute()

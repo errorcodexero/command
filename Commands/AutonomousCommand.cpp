@@ -10,11 +10,14 @@
 #include "BallCollectorStop.h"
 
 AutonomousCommand::AutonomousCommand() :
-    CommandGroup("AutonomousCommand")
+    CommandBase("AutonomousCommand")
 {
-    Requires(&CommandBase::theDriveBase());
-    Requires(&CommandBase::theBlinkyLight());
+    Requires(&theDriveBase());
+    Requires(&theBlinkyLight());
+    Requires(&theBallCollector());
+    Requires(&theBallTray());
 
+    theBallTray().Lower();
     AddSequential(new BlinkyOn());
     AddParallel(new BallCollectorFwd());
     AddSequential(new TimedDrive( 0.35, 0.0, 0.0, 3.0 ));
@@ -34,8 +37,8 @@ AutonomousCommand::AutonomousCommand() :
 
 void AutonomousCommand::Interrupted()
 {
-    CommandBase::theDriveBase().DisableMotors();
-    CommandBase::theBlinkyLight().Set(0.0);
-    CommandBase::theBallCollector().Set(0.0);
+    theDriveBase().DisableMotors();
+    theBlinkyLight().Set(0.0);
+    theBallCollector().Set(0.0);
 }
 
