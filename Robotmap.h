@@ -27,6 +27,7 @@
 #define	BALL_COLLECTOR_PWM	2	// Victor to control ball collector
 
 // Ball Tray (pneumatic cylinder and limit switch)
-#define	BALL_TRAY_SOLENOID	1	// energize to raise tray for dumping
+#define	BALL_TRAY_RAISE		1	// energize to raise tray for dumping
+#define	BALL_TRAY_LOWER		2	// energize to lower tray for collecting
 
 #endif

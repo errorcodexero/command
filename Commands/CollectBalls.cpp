@@ -1,7 +1,7 @@
-#include "BallCollectorRev.h"
+#include "CollectBalls.h"
 
-BallCollectorRev::BallCollectorRev() :
-    CommandBase("BallCollectorRev")
+CollectBalls::CollectBalls() :
+    CommandBase("CollectBalls")
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
@@ -9,31 +9,33 @@ BallCollectorRev::BallCollectorRev() :
 }
 
 // Called just before this Command runs the first time
-void BallCollectorRev::Initialize()
+void CollectBalls::Initialize()
 {
+    theBallCollector().Lower();
+    theBallCollector().SetSpeed(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void BallCollectorRev::Execute()
+void CollectBalls::Execute()
 {
-    theBallCollector().Set(-1.0);
+    theBallCollector().RunForward();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BallCollectorRev::IsFinished()
+bool CollectBalls::IsFinished()
 {
     return false;
 }
 
 // Called once after isFinished returns true
-void BallCollectorRev::End()
+void CollectBalls::End()
 {
     ;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void BallCollectorRev::Interrupted()
+void CollectBalls::Interrupted()
 {
     ;
 }

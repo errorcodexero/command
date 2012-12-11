@@ -1,11 +1,11 @@
-#ifndef BALL_COLLECTOR_STOP_H
-#define BALL_COLLECTOR_STOP_H
+#ifndef DUMP_BALLS_H
+#define DUMP_BALLS_H
 
 #include "../CommandBase.h"
 
-class BallCollectorStop: public CommandBase {
+class DumpBalls: public CommandBase {
 public:
-    BallCollectorStop();
+    DumpBalls();
     virtual void Initialize();
     virtual void Execute();
     virtual bool IsFinished();

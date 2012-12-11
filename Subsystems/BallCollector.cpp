@@ -3,7 +3,10 @@
 
 BallCollector::BallCollector() :
     Subsystem("BallCollector"),
-    pwm( BALL_COLLECTOR_PWM  )
+    pwm( BALL_COLLECTOR_PWM  ),
+    raise( BALL_TRAY_RAISE  ),
+    lower( BALL_TRAY_LOWER  ),
+    m_speed(1.0)
 {
     Disable();
 }
@@ -13,13 +16,46 @@ BallCollector::BallCollector() :
 
 void BallCollector::Disable()
 {
-    pwm.Disable();
+    // stop motor
+    Stop();
+
+    // stop pneumatics
+    raise.Set(false);
+    lower.Set(false);
+}
+
+void BallCollector::SetSpeed( float value )
+{
+    m_speed = value;
+}
+
+void BallCollector::RunForward()
+{
+    pwm.Set(m_speed);
+    pwm.SetSafetyEnabled(true);
+}
+
+void BallCollector::RunReverse()
+{
+    pwm.Set(-m_speed);
+    pwm.SetSafetyEnabled(true);
+}
+
+void BallCollector::Stop()
+{
+    pwm.Set(0);
     pwm.SetSafetyEnabled(false);
 }
 
-void BallCollector::Set( float value )
+void BallCollector::Raise()
 {
-    pwm.Set(value);
-    pwm.SetSafetyEnabled(true);
+    lower.Set(false);
+    raise.Set(true);
+}
+
+void BallCollector::Lower()
+{
+    raise.Set(false);
+    lower.Set(true);
 }
 

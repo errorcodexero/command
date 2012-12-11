@@ -38,8 +38,3 @@ BallCollector& CommandBase::theBallCollector()
     return ballCollector;
 }
 
-BallTray& CommandBase::theBallTray()
-{
-    static BallTray ballTray;
-    return ballTray;
-}

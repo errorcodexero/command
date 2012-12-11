@@ -1,11 +1,11 @@
-#ifndef BALL_COLLECTOR_REV_H
-#define BALL_COLLECTOR_REV_H
+#ifndef COLLECT_BALLS_H
+#define COLLECT_BALLS_H
 
 #include "../CommandBase.h"
 
-class BallCollectorRev: public CommandBase {
+class CollectBalls: public CommandBase {
 public:
-    BallCollectorRev();
+    CollectBalls();
     virtual void Initialize();
     virtual void Execute();
     virtual bool IsFinished();

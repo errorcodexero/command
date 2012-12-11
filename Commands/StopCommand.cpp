@@ -6,12 +6,14 @@ StopCommand::StopCommand() :
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
     Requires(&theDriveBase());
+    Requires(&theBallCollector());
 }
 
 // Called just before this Command runs the first time
 void StopCommand::Initialize()
 {
     theDriveBase().DisableMotors();
+    theBallCollector().Disable();
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -1,7 +1,7 @@
-#include "BallCollectorFwd.h"
+#include "DumpBalls.h"
 
-BallCollectorFwd::BallCollectorFwd() :
-    CommandBase("BallCollectorFwd")
+DumpBalls::DumpBalls() :
+    CommandBase("DumpBalls")
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
@@ -9,31 +9,33 @@ BallCollectorFwd::BallCollectorFwd() :
 }
 
 // Called just before this Command runs the first time
-void BallCollectorFwd::Initialize()
+void DumpBalls::Initialize()
 {
+    theBallCollector().Raise();
+    theBallCollector().SetSpeed(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void BallCollectorFwd::Execute()
+void DumpBalls::Execute()
 {
-    theBallCollector().Set(1.0);
+    theBallCollector().RunReverse();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BallCollectorFwd::IsFinished()
+bool DumpBalls::IsFinished()
 {
     return false;
 }
 
 // Called once after isFinished returns true
-void BallCollectorFwd::End()
+void DumpBalls::End()
 {
     ;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void BallCollectorFwd::Interrupted()
+void DumpBalls::Interrupted()
 {
     ;
 }

@@ -1,14 +1,15 @@
 #include "DriveCommand.h"
-#include "BallCollectorFwd.h"
-#include "BallCollectorRev.h"
+#include "CollectBalls.h"
+#include "DumpBalls.h"
 
 DriveCommand::DriveCommand() :
-    CommandBase("DriveCommand")
+    CommandBase("DriveCommand"),
+    m_collectBalls(),
+    m_dumpBalls()
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
     Requires(&theDriveBase());
-    Requires(&theBallTray());
     Requires(&theBallCollector());
 }
 
@@ -36,12 +37,11 @@ void DriveCommand::Execute()
 
     // do something here with the ball collector controls...
 
-    if (theOI().GetDriverTrigger()) {
-    	theBallTray().Raise();
-    	AddParallel(new BallCollectorRev());
-    } else {
-    	theBallTray().Lower();
-    	AddParallel(new BallCollectorFwd());
+    if (theOI().GetDriverButton2()) {
+    	m_collectBalls.Run();
+    }
+    if (theOI().GetDriverButton3()) {
+	m_dumpBalls.Run();
     }
 }
 
@@ -54,12 +54,14 @@ bool DriveCommand::IsFinished()
 // Called once after isFinished returns true
 void DriveCommand::End()
 {
-    theDriveBase().DisableMotors();
+    ;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveCommand::Interrupted()
 {
-    ;
+    theDriveBase().DisableMotors();
+    theBallCollector().Disable();
+    theBlinkyLight().Set(0.0);
 }

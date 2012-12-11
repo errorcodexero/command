@@ -6,7 +6,6 @@
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/BlinkyLight.h"
 #include "Subsystems/BallCollector.h"
-#include "Subsystems/BallTray.h"
 
 // CommandBase is the base for all commands.  It is subclassed from
 // CommandGroup (composite commands) and Command (atomic commands).
@@ -26,7 +25,6 @@ public:
     static DriveBase &theDriveBase();
     static BlinkyLight &theBlinkyLight();
     static BallCollector &theBallCollector();
-    static BallTray &theBallTray();
 };
 
 #endif
