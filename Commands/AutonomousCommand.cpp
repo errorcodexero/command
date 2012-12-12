@@ -28,7 +28,7 @@ AutonomousCommand::AutonomousCommand() :
     // AddSequential(new BlinkyOff());
     // AddSequential(new WaitCommand(2.0));
     AddSequential(new StopCommand());
-    AddSequential(new BlinkyBreathe(8.0));
+    AddSequential(new BlinkyBreathe(6.0));
 }
 
 void AutonomousCommand::Interrupted()

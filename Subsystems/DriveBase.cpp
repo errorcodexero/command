@@ -72,8 +72,8 @@ void DriveBase::EnablePercentVbusControl( CANJaguar& motor )
     //   motorSafetyHelper with the previous timer already expired.
     motor.Set( 0.0F, 0 );
 
-    // Now it's safe to enable.
-    motor.SetSafetyEnabled( true );
+    // RobotDrive will handle safety
+    motor.SetSafetyEnabled( false );
 
     // Set the timer a little longer than default
     //   to allow for CAN timeouts and retries.
@@ -121,8 +121,8 @@ void DriveBase::EnableVoltageControl( CANJaguar& motor )
     //   motorSafetyHelper with the previous timer already expired.
     motor.Set( 0.0F, 0 );
 
-    // Now it's safe to enable.
-    motor.SetSafetyEnabled( true );
+    // RobotDrive will handle safety
+    motor.SetSafetyEnabled( false );
 
     // Set the timer a little longer than default
     //   to allow for CAN timeouts and retries.
@@ -173,8 +173,8 @@ void DriveBase::EnableSpeedControl( CANJaguar& motor, double p, double i, double
     //   motorSafetyHelper with the previous timer already expired.
     motor.Set( 0.0F, 0 );
 
-    // Now it's safe to enable.
-    motor.SetSafetyEnabled( true );
+    // RobotDrive will handle safety
+    motor.SetSafetyEnabled( false );
 
     // Set the timer a little longer than default
     //   to allow for CAN timeouts and retries.

@@ -32,13 +32,15 @@ void BallCollector::SetSpeed( float value )
 void BallCollector::RunForward()
 {
     pwm.Set(m_speed);
-    pwm.SetSafetyEnabled(true);
+//    pwm.SetSafetyEnabled(true);
+    pwm.SetSafetyEnabled(false);
 }
 
 void BallCollector::RunReverse()
 {
     pwm.Set(-m_speed);
-    pwm.SetSafetyEnabled(true);
+//    pwm.SetSafetyEnabled(true);
+    pwm.SetSafetyEnabled(false);
 }
 
 void BallCollector::Stop()

@@ -8,7 +8,7 @@
 
 BlinkyBreathe::BlinkyBreathe( float seconds ) :
     CommandBase("BlinkyBreathe"),
-    m_cycleTime(seconds * 1.0e6),
+    m_cycleTime(seconds),
     m_startTime(0.0)
 {
     // Use Requires() here to declare subsystem dependencies
