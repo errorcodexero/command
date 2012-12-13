@@ -1,7 +1,7 @@
-#include "DumpBalls.h"
+#include "HoldBalls.h"
 
-DumpBalls::DumpBalls() :
-    CommandBase("DumpBalls")
+HoldBalls::HoldBalls() :
+    CommandBase("HoldBalls")
 {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
@@ -9,33 +9,32 @@ DumpBalls::DumpBalls() :
 }
 
 // Called just before this Command runs the first time
-void DumpBalls::Initialize()
+void HoldBalls::Initialize()
 {
-    theBallCollector().Lower();
-    theBallCollector().SetSpeed(1.0);
+    theBallCollector().Raise();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DumpBalls::Execute()
+void HoldBalls::Execute()
 {
-    theBallCollector().RunReverse();
+    ;
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DumpBalls::IsFinished()
+bool HoldBalls::IsFinished()
 {
-    return false;
+    return true;
 }
 
 // Called once after isFinished returns true
-void DumpBalls::End()
+void HoldBalls::End()
 {
     ;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DumpBalls::Interrupted()
+void HoldBalls::Interrupted()
 {
     ;
 }

@@ -6,15 +6,11 @@
 
 #define	ENCODER_COUNT	360
 
-//#define	SPEED_P		0.300
-//#define	SPEED_I		0.003
-//#define	SPEED_D		0.001
-#define	SPEED_P		0.005
-#define	SPEED_I		0.0
-#define	SPEED_D		0.0
+#define	SPEED_P		0.100
+#define	SPEED_I		0.000  // 0.003
+#define	SPEED_D		0.000  // 0.001
 
-//#define	MAX_SPEED	300		// RPM
-#define	MAX_SPEED	1.0
+#define	MAX_SPEED	100		// RPM
 
 #define	POSITION_P	6000.
 #define	POSITION_I	5.000
@@ -164,7 +160,7 @@ void DriveBase::EnableVoltageControl()
 void DriveBase::EnableSpeedControl( CANJaguar& motor, double p, double i, double d )
 {
     motor.ChangeControlMode( CANJaguar::kSpeed );
-    motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// does this matter?
+    motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// limit max output
     motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Brake );
     motor.SetSpeedReference( CANJaguar::kSpeedRef_QuadEncoder );
     motor.ConfigEncoderCodesPerRev( ENCODER_COUNT );
@@ -195,7 +191,7 @@ void DriveBase::EnableSpeedControl()
     EnableSpeedControl( motorLF, SPEED_P, SPEED_I, SPEED_D );
     EnableSpeedControl( motorRR, SPEED_P, SPEED_I, SPEED_D );
 
-    // limit top speed for better low-speed control
+    // set top speed
     drive.SetMaxOutput( MAX_SPEED );
 
     // Feed the watchdog now to avoid a race condition when enabling
