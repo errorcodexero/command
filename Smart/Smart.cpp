@@ -272,16 +272,16 @@ void SmartCANJaguar::Log()
 	SmartDashboard::Log( Get(), m_setName );
     }
     if (m_voltageName) {
-	SmartDashboard::Log( GetOutputVoltage(), m_setName );
+	SmartDashboard::Log( GetOutputVoltage(), m_voltageName );
     }
     if (m_currentName) {
-	SmartDashboard::Log( GetOutputCurrent(), m_setName );
+	SmartDashboard::Log( GetOutputCurrent(), m_currentName );
     }
     if (m_speedName) {
-	SmartDashboard::Log( GetSpeed(), m_setName );
+	SmartDashboard::Log( GetSpeed(), m_speedName );
     }
     if (m_positionName) {
-	SmartDashboard::Log( GetPosition(), m_setName );
+	SmartDashboard::Log( GetPosition(), m_positionName );
     }
     // faults, vBus, temperature ...
 }

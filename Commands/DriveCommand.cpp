@@ -20,7 +20,7 @@ DriveCommand::DriveCommand() :
 void DriveCommand::Initialize()
 {
     theDriveBase().DisableMotors();
-    theDriveBase().EnableVoltageControl();
+    theDriveBase().EnableSpeedControl();
     m_direction = k_stopped;
 }
 

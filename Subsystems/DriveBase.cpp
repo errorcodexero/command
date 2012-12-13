@@ -6,11 +6,15 @@
 
 #define	ENCODER_COUNT	360
 
-#define	SPEED_P		0.300
-#define	SPEED_I		0.003
-#define	SPEED_D		0.001
+//#define	SPEED_P		0.300
+//#define	SPEED_I		0.003
+//#define	SPEED_D		0.001
+#define	SPEED_P		0.005
+#define	SPEED_I		0.0
+#define	SPEED_D		0.0
 
-#define	MAX_SPEED	300
+//#define	MAX_SPEED	300		// RPM
+#define	MAX_SPEED	1.0
 
 #define	POSITION_P	6000.
 #define	POSITION_I	5.000
