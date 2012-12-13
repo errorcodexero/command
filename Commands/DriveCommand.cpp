@@ -8,12 +8,12 @@ DriveCommand::DriveCommand() :
     m_collectBalls(),
     m_dumpBalls(),
     m_holdBalls(),
-    m_direction(k_stopped)
+    m_direction(k_joystick)
 {
-    // Use Requires() here to declare subsystem dependencies
-    // eg. Requires(chassis);
+    // Use Requires() here to declare subsystem dependencies.
+    // Don't include the BallCollector here - it's driven by
+    // subcommands which have their own dependencies.
     Requires(&theDriveBase());
-    Requires(&theBallCollector());
     Requires(&theBlinkyLight());
 }
 
@@ -22,15 +22,21 @@ void DriveCommand::Initialize()
 {
     theDriveBase().DisableMotors();
     theDriveBase().EnableVoltageControl();
-    m_direction = k_stopped;
+    m_direction = k_joystick;
+    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+    lcd->PrintfLine(DriverStationLCD::kUser_Line1, "joystick");
+    lcd->UpdateLCD();
 }
 
 void DriveCommand::Go( DriveDirection direction, float speed )
 {
     switch (direction) {
     default:
-    case k_stopped:
-	theDriveBase().DriveCartesian( 0, 0, 0 );
+    case k_joystick:
+	float fwd = -theOI().GetDriverY() * speed;
+	float side = theOI().GetDriverX() * speed;
+	float twist = theOI().GetDriverTwist() * speed;
+	theDriveBase().DriveCartesian( fwd, side, twist );
 	break;
     case k_forward:
 	theDriveBase().DriveCartesian( speed, 0, 0 );
@@ -61,27 +67,34 @@ void DriveCommand::Execute()
     // twist-right   +t
     // twist-left    -t
 
+    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+
     float fwd = -theOI().GetDriverY();
     float side = theOI().GetDriverX();
-    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+
     if (theOI().GetDriverTrigger()) {
-	lcd->PrintfLine(DriverStationLCD::kUser_Line1, "stopped");
-	m_direction = k_stopped;
-    } else if (fabs(fwd) > fabs(side)) {
-	if (fwd > 0.5) {
-	    lcd->PrintfLine(DriverStationLCD::kUser_Line1, "forward");
-	    m_direction = k_forward;
-	} else if (fwd < -0.5) {
-	    lcd->PrintfLine(DriverStationLCD::kUser_Line1, "reverse");
-	    m_direction = k_reverse;
-	}
-    } else {
-	if (side > 0.5) {
-	    lcd->PrintfLine(DriverStationLCD::kUser_Line1, "right");
-	    m_direction = k_right;
-	} else if (side < -0.5) {
-	    lcd->PrintfLine(DriverStationLCD::kUser_Line1, "left");
-	    m_direction = k_left;
+	if (fabs(fwd) > fabs(side)) {
+	    if (fwd > 0.5) {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "forward");
+		m_direction = k_forward;
+	    } else if (fwd < -0.5) {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "reverse");
+		m_direction = k_reverse;
+	    } else {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "joystick");
+		m_direction = k_joystick;
+	    }
+	} else {
+	    if (side > 0.5) {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "right");
+		m_direction = k_right;
+	    } else if (side < -0.5) {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "left");
+		m_direction = k_left;
+	    } else {
+		lcd->PrintfLine(DriverStationLCD::kUser_Line1, "joystick");
+		m_direction = k_joystick;
+	    }
 	}
     }
 

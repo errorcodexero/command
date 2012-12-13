@@ -13,7 +13,7 @@ private:
     HoldBalls m_holdBalls;
 
     typedef enum {
-	k_stopped = 0,
+	k_joystick = 0,
 	k_forward = 1,
 	k_reverse = 2,
 	k_right   = 3,
