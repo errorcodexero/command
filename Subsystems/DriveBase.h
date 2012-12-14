@@ -14,12 +14,12 @@ private:
 
     RobotDrive drive;
 
-    static void DisableMotor( CANJaguar& motor );
-    static void EnablePercentVbusControl( CANJaguar& motor );
-    static void EnableVoltageControl( CANJaguar& motor );
-    static void EnableSpeedControl( CANJaguar& motor,
+    static void DisableMotor( XCANJaguar& motor );
+    static void EnablePercentVbusControl( XCANJaguar& motor );
+    static void EnableVoltageControl( XCANJaguar& motor );
+    static void EnableSpeedControl( XCANJaguar& motor,
     			double p, double i, double d );
-    static void EnablePositionControl( CANJaguar& motor,
+    static void EnablePositionControl( XCANJaguar& motor,
     			double p, double i, double d );
     unsigned long m_driveTime;
 

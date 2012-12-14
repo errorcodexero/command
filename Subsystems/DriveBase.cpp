@@ -42,7 +42,7 @@ void DriveBase::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-void DriveBase::DisableMotor( CANJaguar& motor )
+void DriveBase::DisableMotor( XCANJaguar& motor )
 {
     motor.DisableControl();
     motor.SetSafetyEnabled(false);	// CANJaguar *should* do this
@@ -59,11 +59,11 @@ void DriveBase::DisableMotors()
     DisableMotor( motorRR );		// RobotDrive *should* do this as well
 }
 
-void DriveBase::EnablePercentVbusControl( CANJaguar& motor )
+void DriveBase::EnablePercentVbusControl( XCANJaguar& motor )
 {
-    motor.ChangeControlMode( CANJaguar::kPercentVbus );
+    motor.ChangeControlMode( XCANJaguar::kPercentVbus );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// does this matter?
-    motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Coast );
+    motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Coast );
 
     // force change in control mode
     motor.EnableControl();
@@ -107,12 +107,12 @@ void DriveBase::EnablePercentVbusControl()
     drive.SetLeftRightMotorOutputs( 0.0F, 0.0F );
 }
 
-void DriveBase::EnableVoltageControl( CANJaguar& motor )
+void DriveBase::EnableVoltageControl( XCANJaguar& motor )
 {
-    motor.ChangeControlMode( CANJaguar::kVoltage );
+    motor.ChangeControlMode( XCANJaguar::kVoltage );
     // set max voltage to something reachable even with a low battery
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );
-    motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Coast );
+    motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Coast );
 
     // force change in control mode
     motor.EnableControl();
@@ -157,12 +157,12 @@ void DriveBase::EnableVoltageControl()
     drive.SetLeftRightMotorOutputs( 0.0F, 0.0F );
 }
 
-void DriveBase::EnableSpeedControl( CANJaguar& motor, double p, double i, double d )
+void DriveBase::EnableSpeedControl( XCANJaguar& motor, double p, double i, double d )
 {
-    motor.ChangeControlMode( CANJaguar::kSpeed );
+    motor.ChangeControlMode( XCANJaguar::kSpeed );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// limit max output
-    motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Brake );
-    motor.SetSpeedReference( CANJaguar::kSpeedRef_QuadEncoder );
+    motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Brake );
+    motor.SetSpeedReference( XCANJaguar::kSpeedRef_QuadEncoder );
     motor.ConfigEncoderCodesPerRev( ENCODER_COUNT );
     motor.SetPID( p, i, d );
 
@@ -209,12 +209,12 @@ void DriveBase::EnableSpeedControl()
     drive.SetLeftRightMotorOutputs( 0.0F, 0.0F );
 }
 
-void DriveBase::EnablePositionControl( CANJaguar& motor, double p, double i, double d )
+void DriveBase::EnablePositionControl( XCANJaguar& motor, double p, double i, double d )
 {
-    motor.ChangeControlMode( CANJaguar::kPosition );
+    motor.ChangeControlMode( XCANJaguar::kPosition );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// does this matter?
-    motor.ConfigNeutralMode( CANJaguar::kNeutralMode_Brake );
-    motor.SetPositionReference( CANJaguar::kPosRef_QuadEncoder );
+    motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Brake );
+    motor.SetPositionReference( XCANJaguar::kPosRef_QuadEncoder );
     motor.ConfigEncoderCodesPerRev( ENCODER_COUNT );
 
     motor.SetPID( p, i, d );

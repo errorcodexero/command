@@ -5,6 +5,7 @@
 #define _SMART_H_
 
 #include <WPILib.h>
+#include "XCANJaguar.h"
 
 class SmartJoystick : public Joystick
 {
@@ -76,7 +77,7 @@ private:
     const char *m_name;
 };
 
-class SmartCANJaguar : public CANJaguar
+class SmartCANJaguar : public XCANJaguar
 {
 public:
     explicit SmartCANJaguar(UINT8 deviceNumber, const char* name, ControlMode controlMode = kPercentVbus);
@@ -94,10 +95,13 @@ private:
     const char *m_name;
 
     const char *m_setName;
+    const char *m_busName;
     const char *m_voltageName;
     const char *m_currentName;
     const char *m_speedName;
     const char *m_positionName;
+
+    Timer m_logTimer;
 };
 
 class SmartPWM : public PWM

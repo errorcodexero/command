@@ -201,15 +201,18 @@ SmartJaguar::~SmartJaguar()
 ///////////////////////////////////////////////////////////////////////////////
 
 SmartCANJaguar::SmartCANJaguar( UINT8 deviceNumber, const char* name, ControlMode controlMode )
-    : CANJaguar( deviceNumber, controlMode ),
+    : XCANJaguar( deviceNumber, controlMode ),
       m_name(name),
       m_setName(NULL),
+      m_busName(NULL),
       m_voltageName(NULL),
       m_currentName(NULL),
       m_speedName(NULL),
-      m_positionName(NULL)
+      m_positionName(NULL),
+      m_logTimer()
 {
     InitSmartCANJaguar();
+    m_logTimer.Start();
 }
 
 char* SmartCANJaguar::LogName( const char* varName )
@@ -229,6 +232,7 @@ char* SmartCANJaguar::LogName( const char* varName )
 void SmartCANJaguar::InitSmartCANJaguar()
 {
     m_setName      = LogName("set");
+    m_busName      = LogName("bus");
     m_voltageName  = LogName("voltage");
     m_currentName  = LogName("current");
     m_speedName    = LogName("speed");
@@ -236,6 +240,7 @@ void SmartCANJaguar::InitSmartCANJaguar()
 
     printf("SmartCANJaguar: m_name = %s\n", m_name);
     printf("SmartCANJaguar: m_setName = %s\n", m_setName);
+    printf("SmartCANJaguar: m_busName = %s\n", m_busName);
     printf("SmartCANJaguar: m_voltageName = %s\n", m_voltageName);
     printf("SmartCANJaguar: m_currentName = %s\n", m_currentName);
     printf("SmartCANJaguar: m_speedName = %s\n", m_speedName);
@@ -244,32 +249,62 @@ void SmartCANJaguar::InitSmartCANJaguar()
 
 void SmartCANJaguar::Log()
 {
+    // limit display update rate
+    if (!m_logTimer.HasPeriodPassed(0.5)) {
+	return;
+    }
+
+    XCANJaguar::ControlMode mode = GetControlMode();
+
     if (m_name) {
-	const char * mode;
-	switch( GetControlMode() ) {
-	case CANJaguar::kPercentVbus:
-	    mode = "percentVbus";
+	const char * modeName;
+	switch(mode) {
+	case XCANJaguar::kPercentVbus:
+	    modeName = "percentVbus";
 	    break;
-	case CANJaguar::kVoltage:
-	    mode = "voltage";
+	case XCANJaguar::kVoltage:
+	    modeName = "voltage";
 	    break;
-	case CANJaguar::kCurrent:
-	    mode = "current";
+	case XCANJaguar::kCurrent:
+	    modeName = "current";
 	    break;
-	case CANJaguar::kSpeed:
-	    mode = "speed";
+	case XCANJaguar::kSpeed:
+	    modeName = "speed";
 	    break;
-	case CANJaguar::kPosition:
-	    mode = "position";
+	case XCANJaguar::kPosition:
+	    modeName = "position";
 	    break;
 	default:
-	    mode = "unknown";
+	    modeName = "unknown";
 	    break;
 	}
-	SmartDashboard::Log( mode, m_name );
+	SmartDashboard::Log( modeName, m_name );
     }
+
     if (m_setName) {
-	SmartDashboard::Log( Get(), m_setName );
+	float value = Get();
+
+	switch(mode) {
+	case XCANJaguar::kPercentVbus:
+				// no scaling -- assume -1 to +1
+	    break;
+	case XCANJaguar::kVoltage:
+	    value /= 12.0;	// scale by nominal bus voltage
+	    break;
+	case XCANJaguar::kCurrent:
+	    value /= 40.0;	// scale by circuit breaker limit
+	    break;
+	case XCANJaguar::kSpeed:
+	    value /= 5000.;	// scale by CIM unloaded max speed
+	    break;
+	case XCANJaguar::kPosition:
+				// no scaling -- assume -1 to +1 rotation
+	    break;
+	}
+	SmartDashboard::Log( value, m_setName );
+    }
+    if (m_busName) {
+	SmartDashboard::Log( GetBusVoltage(), m_busName );
     }
     if (m_voltageName) {
 	SmartDashboard::Log( GetOutputVoltage(), m_voltageName );
@@ -277,24 +312,24 @@ void SmartCANJaguar::Log()
     if (m_currentName) {
 	SmartDashboard::Log( GetOutputCurrent(), m_currentName );
     }
-    if (m_speedName) {
+    if ((mode == XCANJaguar::kSpeed) && m_speedName) {
 	SmartDashboard::Log( GetSpeed(), m_speedName );
     }
-    if (m_positionName) {
+    if ((mode == XCANJaguar::kPosition) && m_positionName) {
 	SmartDashboard::Log( GetPosition(), m_positionName );
     }
-    // faults, vBus, temperature ...
+    // faults, temperature ...
 }
 
 void SmartCANJaguar::Set( float value, UINT8 syncGroup )
 {
-    CANJaguar::Set( value, syncGroup );
+    XCANJaguar::Set( value, syncGroup );
     Log();
 }
 
 void SmartCANJaguar::Disable()
 {
-    CANJaguar::Disable();
+    XCANJaguar::Disable();
     if (m_name) SmartDashboard::Log( "disabled", m_name );
 }
 
