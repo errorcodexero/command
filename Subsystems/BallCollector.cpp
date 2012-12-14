@@ -22,6 +22,10 @@ void BallCollector::Disable()
     // stop pneumatics
     raise.Set(false);
     lower.Set(false);
+
+    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+    lcd->PrintfLine(DriverStationLCD::kUser_Line2, "");
+    lcd->UpdateLCD();
 }
 
 void BallCollector::SetSpeed( float value )
@@ -32,15 +36,13 @@ void BallCollector::SetSpeed( float value )
 void BallCollector::RunForward()
 {
     pwm.Set(m_speed);
-//    pwm.SetSafetyEnabled(true);
-    pwm.SetSafetyEnabled(false);
+    pwm.SetSafetyEnabled(true);
 }
 
 void BallCollector::RunReverse()
 {
     pwm.Set(-m_speed);
-//    pwm.SetSafetyEnabled(true);
-    pwm.SetSafetyEnabled(false);
+    pwm.SetSafetyEnabled(true);
 }
 
 void BallCollector::Stop()

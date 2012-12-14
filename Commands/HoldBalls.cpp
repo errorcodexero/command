@@ -11,7 +11,12 @@ HoldBalls::HoldBalls() :
 // Called just before this Command runs the first time
 void HoldBalls::Initialize()
 {
+    theBallCollector().Stop();
     theBallCollector().Raise();
+
+    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+    lcd->PrintfLine(DriverStationLCD::kUser_Line2, "hold");
+    lcd->UpdateLCD();
 }
 
 // Called repeatedly when this Command is scheduled to run

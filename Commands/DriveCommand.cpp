@@ -5,9 +5,6 @@
 
 DriveCommand::DriveCommand() :
     CommandBase("DriveCommand"),
-    m_collectBalls(),
-    m_dumpBalls(),
-    m_holdBalls(),
     m_direction(k_joystick)
 {
     // Use Requires() here to declare subsystem dependencies.
@@ -100,19 +97,6 @@ void DriveCommand::Execute()
 
     float speed = (1.0 - theOI().GetDriverThrottle()) / 2.0;
     Go( m_direction, speed );
-
-    // do something here with the ball collector controls...
-
-    if (theOI().GetDriverButton2()) {
-	lcd->PrintfLine(DriverStationLCD::kUser_Line2, "hold");
-    	m_holdBalls.Start();
-    } else if (theOI().GetDriverButton3()) {
-	lcd->PrintfLine(DriverStationLCD::kUser_Line2, "collect");
-    	m_collectBalls.Start();
-    } else if (theOI().GetDriverButton4()) {
-	lcd->PrintfLine(DriverStationLCD::kUser_Line2, "dump");
-	m_dumpBalls.Start();
-    }
 
     lcd->UpdateLCD();
 }

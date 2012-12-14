@@ -7,6 +7,9 @@ StopCommand::StopCommand() :
     // eg. Requires(chassis);
     Requires(&theDriveBase());
     Requires(&theBallCollector());
+
+    // This command is safe to run when disabled
+    SetRunWhenDisabled(true);
 }
 
 // Called just before this Command runs the first time

@@ -8,10 +8,6 @@
 
 class DriveCommand: public CommandBase {
 private:
-    CollectBalls m_collectBalls;
-    DumpBalls m_dumpBalls;
-    HoldBalls m_holdBalls;
-
     typedef enum {
 	k_joystick = 0,
 	k_forward = 1,

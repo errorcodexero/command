@@ -13,6 +13,10 @@ void DumpBalls::Initialize()
 {
     theBallCollector().Lower();
     theBallCollector().SetSpeed(1.0);
+
+    DriverStationLCD *lcd = DriverStationLCD::GetInstance();
+    lcd->PrintfLine(DriverStationLCD::kUser_Line2, "dump");
+    lcd->UpdateLCD();
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -12,6 +12,11 @@ class OI
 private:
     DriverStationEnhancedIO *pIO;
     SmartJoystick driverStick;
+    JoystickButton button2;
+    JoystickButton button3;
+    JoystickButton button4;
+    JoystickButton button5;
+    JoystickButton button6;
 
 public:
     OI();
