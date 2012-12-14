@@ -5,7 +5,7 @@
 #define _OI_H_
 
 #include <WPILib.h>
-#include "../Smart/Smart.h"
+#include "Smart/Smart.h"
 
 class OI
 {
