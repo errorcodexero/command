@@ -25,7 +25,7 @@ SmartJoystick::SmartJoystick( UINT32 port, UINT32 numAxisTypes, UINT32 numButton
 char* SmartJoystick::LogName( const char* axisName )
 {
     // Doing this in C isn't elegant, but provides a low-overhead match
-    // to the SmnartDashboard interface that relies on C strings.
+    // to the SmartDashboard interface that relies on C strings.
 
     // "+2" allows for the space between the strings and a trailing NUL
     int len = strlen(m_name) + strlen(axisName) + 2;
@@ -204,12 +204,14 @@ SmartCANJaguar::SmartCANJaguar( UINT8 deviceNumber, const char* name, ControlMod
     : XCANJaguar( deviceNumber, controlMode ),
       m_name(name),
       m_setName(NULL),
+      m_getName(NULL),
       m_busName(NULL),
       m_voltageName(NULL),
       m_currentName(NULL),
       m_speedName(NULL),
       m_positionName(NULL),
-      m_logTimer()
+      m_logTimer(),
+      m_setPoint(0.0)
 {
     InitSmartCANJaguar();
     m_logTimer.Start();
@@ -218,7 +220,7 @@ SmartCANJaguar::SmartCANJaguar( UINT8 deviceNumber, const char* name, ControlMod
 char* SmartCANJaguar::LogName( const char* varName )
 {
     // Doing this in C isn't elegant, but provides a low-overhead match
-    // to the SmnartDashboard interface that relies on C strings.
+    // to the SmartDashboard interface that relies on C strings.
 
     // "+2" allows for the space between the strings and a trailing NUL
     int len = strlen(m_name) + strlen(varName) + 2;
@@ -232,6 +234,7 @@ char* SmartCANJaguar::LogName( const char* varName )
 void SmartCANJaguar::InitSmartCANJaguar()
 {
     m_setName      = LogName("set");
+    m_getName      = LogName("get");
     m_busName      = LogName("bus");
     m_voltageName  = LogName("voltage");
     m_currentName  = LogName("current");
@@ -240,6 +243,7 @@ void SmartCANJaguar::InitSmartCANJaguar()
 
     printf("SmartCANJaguar: m_name = %s\n", m_name);
     printf("SmartCANJaguar: m_setName = %s\n", m_setName);
+    printf("SmartCANJaguar: m_getName = %s\n", m_getName);
     printf("SmartCANJaguar: m_busName = %s\n", m_busName);
     printf("SmartCANJaguar: m_voltageName = %s\n", m_voltageName);
     printf("SmartCANJaguar: m_currentName = %s\n", m_currentName);
@@ -250,28 +254,28 @@ void SmartCANJaguar::InitSmartCANJaguar()
 void SmartCANJaguar::Log()
 {
     // limit display update rate
-    if (!m_logTimer.HasPeriodPassed(0.5)) {
+    if (!m_logTimer.HasPeriodPassed(0.25)) {
 	return;
     }
 
-    XCANJaguar::ControlMode mode = GetControlMode();
+    ControlMode mode = GetControlMode();
 
     if (m_name) {
 	const char * modeName;
 	switch(mode) {
-	case XCANJaguar::kPercentVbus:
+	case kPercentVbus:
 	    modeName = "percentVbus";
 	    break;
-	case XCANJaguar::kVoltage:
+	case kVoltage:
 	    modeName = "voltage";
 	    break;
-	case XCANJaguar::kCurrent:
+	case kCurrent:
 	    modeName = "current";
 	    break;
-	case XCANJaguar::kSpeed:
+	case kSpeed:
 	    modeName = "speed";
 	    break;
-	case XCANJaguar::kPosition:
+	case kPosition:
 	    modeName = "position";
 	    break;
 	default:
@@ -282,40 +286,30 @@ void SmartCANJaguar::Log()
     }
 
     if (m_setName) {
-	float value = Get();
-
-	switch(mode) {
-	case XCANJaguar::kPercentVbus:
-				// no scaling -- assume -1 to +1
-	    break;
-	case XCANJaguar::kVoltage:
-	    value /= 12.0;	// scale by nominal bus voltage
-	    break;
-	case XCANJaguar::kCurrent:
-	    value /= 40.0;	// scale by circuit breaker limit
-	    break;
-	case XCANJaguar::kSpeed:
-	    value /= 5000.;	// scale by CIM unloaded max speed
-	    break;
-	case XCANJaguar::kPosition:
-				// no scaling -- assume -1 to +1 rotation
-	    break;
-	}
-	SmartDashboard::Log( value, m_setName );
+	SmartDashboard::Log( m_setPoint, m_setName );
     }
+
+    if (m_getName) {
+	SmartDashboard::Log( Get(), m_getName );
+    }
+
     if (m_busName) {
 	SmartDashboard::Log( GetBusVoltage(), m_busName );
     }
+
     if (m_voltageName) {
 	SmartDashboard::Log( GetOutputVoltage(), m_voltageName );
     }
+
     if (m_currentName) {
 	SmartDashboard::Log( GetOutputCurrent(), m_currentName );
     }
-    if ((mode == XCANJaguar::kSpeed) && m_speedName) {
+
+    if (m_speedName) {
 	SmartDashboard::Log( GetSpeed(), m_speedName );
     }
-    if ((mode == XCANJaguar::kPosition) && m_positionName) {
+
+    if (m_positionName) {
 	SmartDashboard::Log( GetPosition(), m_positionName );
     }
     // faults, temperature ...
@@ -323,6 +317,7 @@ void SmartCANJaguar::Log()
 
 void SmartCANJaguar::Set( float value, UINT8 syncGroup )
 {
+    m_setPoint = value;
     XCANJaguar::Set( value, syncGroup );
     Log();
 }
@@ -420,7 +415,7 @@ SmartEncoder::SmartEncoder(
 char* SmartEncoder::LogName( const char* axisName )
 {
     // Doing this in C isn't elegant, but provides a low-overhead match
-    // to the SmnartDashboard interface that relies on C strings.
+    // to the SmartDashboard interface that relies on C strings.
 
     // "+2" allows for the space between the strings and a trailing NUL
     int len = strlen(m_name) + strlen(axisName) + 2;

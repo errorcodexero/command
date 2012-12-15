@@ -95,6 +95,7 @@ private:
     const char *m_name;
 
     const char *m_setName;
+    const char *m_getName;
     const char *m_busName;
     const char *m_voltageName;
     const char *m_currentName;
@@ -102,6 +103,8 @@ private:
     const char *m_positionName;
 
     Timer m_logTimer;
+
+    float m_setPoint;
 };
 
 class SmartPWM : public PWM

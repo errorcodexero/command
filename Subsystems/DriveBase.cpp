@@ -6,11 +6,11 @@
 
 #define	ENCODER_COUNT	360
 
-#define	SPEED_P		0.100
+#define	SPEED_P		1.000
 #define	SPEED_I		0.000  // 0.003
 #define	SPEED_D		0.000  // 0.001
 
-#define	MAX_SPEED	100		// RPM
+#define	MAX_SPEED	500		// RPM
 
 #define	POSITION_P	6000.
 #define	POSITION_I	5.000
@@ -61,8 +61,8 @@ void DriveBase::DisableMotors()
 
 void DriveBase::EnablePercentVbusControl( XCANJaguar& motor )
 {
-    motor.ChangeControlMode( XCANJaguar::kPercentVbus );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// does this matter?
+    motor.ChangeControlMode( XCANJaguar::kPercentVbus );
     motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Coast );
 
     // force change in control mode
@@ -109,9 +109,9 @@ void DriveBase::EnablePercentVbusControl()
 
 void DriveBase::EnableVoltageControl( XCANJaguar& motor )
 {
-    motor.ChangeControlMode( XCANJaguar::kVoltage );
     // set max voltage to something reachable even with a low battery
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );
+    motor.ChangeControlMode( XCANJaguar::kVoltage );
     motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Coast );
 
     // force change in control mode
@@ -159,8 +159,8 @@ void DriveBase::EnableVoltageControl()
 
 void DriveBase::EnableSpeedControl( XCANJaguar& motor, double p, double i, double d )
 {
-    motor.ChangeControlMode( XCANJaguar::kSpeed );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// limit max output
+    motor.ChangeControlMode( XCANJaguar::kSpeed );
     motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Brake );
     motor.SetSpeedReference( XCANJaguar::kSpeedRef_QuadEncoder );
     motor.ConfigEncoderCodesPerRev( ENCODER_COUNT );
@@ -211,8 +211,8 @@ void DriveBase::EnableSpeedControl()
 
 void DriveBase::EnablePositionControl( XCANJaguar& motor, double p, double i, double d )
 {
-    motor.ChangeControlMode( XCANJaguar::kPosition );
     motor.ConfigMaxOutputVoltage( MAX_OUTPUT );	// does this matter?
+    motor.ChangeControlMode( XCANJaguar::kPosition );
     motor.ConfigNeutralMode( XCANJaguar::kNeutralMode_Brake );
     motor.SetPositionReference( XCANJaguar::kPosRef_QuadEncoder );
     motor.ConfigEncoderCodesPerRev( ENCODER_COUNT );

@@ -1,93 +1,98 @@
 <?xml version="1.0"?>
 <dashboard>
+	<widget field="RR speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="544" y="343"/>
+	</widget>
+	<widget field="LR speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="215" y="349"/>
+	</widget>
+	<widget field="RF speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="540" y="143"/>
+	</widget>
+	<widget field="LF speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="211" y="146"/>
+	</widget>
+	<widget field="LF get" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="212" y="36"/>
+		<width>184</width>
+	</widget>
+	<widget field="RF get" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="541" y="36"/>
+		<width>181</width>
+	</widget>
+	<widget field="RR get" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="542" y="231"/>
+		<width>185</width>
+	</widget>
+	<widget field="LR get" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="215" y="238"/>
+		<width>181</width>
+	</widget>
+	<widget field="RR set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="544" y="204"/>
+	</widget>
+	<widget field="LR set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="217" y="206"/>
+	</widget>
+	<widget field="RF set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="543" y="3"/>
+	</widget>
+	<widget field="LF set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="215" y="3"/>
+	</widget>
 	<widget field="RR current" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="543" y="284"/>
-		<property name="Maximum" value="-40"/>
-		<property name="Minimum" value="40"/>
-	</widget>
-	<widget field="RF voltage" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="541" y="41"/>
-		<property name="Maximum" value="12"/>
-		<property name="Minimum" value="-12"/>
-	</widget>
-	<widget field="RF speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="539" y="118"/>
-		<property name="Minimum" value="-100"/>
+		<location x="542" y="308"/>
+		<property name="Maximum" value="40"/>
+		<property name="Minimum" value="-40"/>
 	</widget>
 	<widget field="RF current" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="539" y="80"/>
-		<property name="Maximum" value="-40"/>
-		<property name="Minimum" value="40"/>
+		<location x="540" y="107"/>
+		<property name="Maximum" value="40"/>
+		<property name="Minimum" value="-40"/>
+	</widget>
+	<widget field="RR bus" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="371" y="244"/>
+	</widget>
+	<widget field="LF bus" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="45" y="42"/>
+	</widget>
+	<widget field="RF bus" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="370" y="42"/>
+		<width>161</width>
+		<height>28</height>
+	</widget>
+	<widget field="LR bus" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="48" y="245"/>
+	</widget>
+	<widget field="RF voltage" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="540" y="73"/>
+		<property name="Maximum" value="12"/>
+		<property name="Minimum" value="-12"/>
 	</widget>
 	<widget field="LR voltage" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="218" y="244"/>
+		<location x="216" y="282"/>
 		<property name="Maximum" value="12"/>
 		<property name="Minimum" value="-12"/>
-	</widget>
-	<widget field="LR speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="215" y="321"/>
-		<property name="Minimum" value="-100"/>
 	</widget>
 	<widget field="RR voltage" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="544" y="244"/>
+		<location x="543" y="274"/>
 		<property name="Maximum" value="12"/>
 		<property name="Minimum" value="-12"/>
 	</widget>
-	<widget field="RR speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="543" y="323"/>
-		<property name="Minimum" value="-100"/>
-	</widget>
 	<widget field="LR current" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="218" y="282"/>
+		<location x="215" y="316"/>
 		<property name="Maximum" value="40"/>
 		<property name="Minimum" value="-40"/>
 	</widget>
 	<widget field="LF voltage" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="213" y="41"/>
+		<location x="212" y="76"/>
 		<property name="Maximum" value="12"/>
 		<property name="Minimum" value="-12"/>
 	</widget>
-	<widget field="LF speed" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="210" y="117"/>
-		<property name="Minimum" value="-100"/>
-	</widget>
 	<widget field="LF current" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="211" y="79"/>
+		<location x="211" y="111"/>
 		<property name="Maximum" value="40"/>
 		<property name="Minimum" value="-40"/>
-	</widget>
-	<widget field="RR position" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="506" y="368"/>
-	</widget>
-	<widget field="RF position" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="508" y="162"/>
-	</widget>
-	<widget field="LR position" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="182" y="365"/>
-	</widget>
-	<widget field="LF position" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="176" y="160"/>
-	</widget>
-	<widget field="RR set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="544" y="204"/>
-		<property name="Maximum" value="1"/>
-		<property name="Minimum" value="-1"/>
-	</widget>
-	<widget field="RF set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="543" y="3"/>
-		<property name="Maximum" value="1"/>
-		<property name="Minimum" value="-1"/>
-	</widget>
-	<widget field="LR set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="221" y="206"/>
-		<height>35</height>
-		<property name="Maximum" value="1"/>
-		<property name="Minimum" value="-1"/>
-	</widget>
-	<widget field="LF set" type="Double" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="215" y="3"/>
-		<property name="Maximum" value="1"/>
-		<property name="Minimum" value="-1"/>
 	</widget>
 	<widget field="RR" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="395" y="213"/>
@@ -101,15 +106,20 @@
 	<widget field="LF" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="71" y="8"/>
 	</widget>
+	<hidden field="LF position"/>
 	<hidden field="driver Trigger"/>
-	<hidden field="shooter"/>
+	<hidden field="LR position"/>
 	<hidden field="Drive"/>
-	<hidden field="target.distance"/>
-	<hidden field="target"/>
-	<hidden field="driver Throttle"/>
 	<hidden field="target.valid"/>
 	<hidden field="driver X"/>
-	<hidden field="Balance.tilt"/>
 	<hidden field="driver Y"/>
 	<hidden field="Control"/>
+	<hidden field="shooter"/>
+	<hidden field="target.distance"/>
+	<hidden field="driver Twist"/>
+	<hidden field="target"/>
+	<hidden field="driver Throttle"/>
+	<hidden field="RR position"/>
+	<hidden field="Balance.tilt"/>
+	<hidden field="RF position"/>
 </dashboard>
