@@ -255,6 +255,6 @@ void DriveBase::EnablePositionControl()
 
 void DriveBase::DriveCartesian( float fwd, float right, float spin)
 {
-    drive.MecanumDrive_Cartesian( -fwd, -right, spin );
+    drive.MecanumDrive_Cartesian( fwd, right, spin );
 }
 
