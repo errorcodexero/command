@@ -2,24 +2,25 @@
 #define DRIVE_BASE_H
 
 #include <WPILib.h>
-#include "../Smart/Smart.h"
+// #include "../Smart/XCANJaguar.h"
+// #include "../Smart/Smart.h"
 
 class DriveBase: public Subsystem
 {
 private:
-    SmartCANJaguar motorLR;
-    SmartCANJaguar motorRR;
-    SmartCANJaguar motorLF;
-    SmartCANJaguar motorRF;
+    CANJaguar motorLR;
+    CANJaguar motorRR;
+    CANJaguar motorLF;
+    CANJaguar motorRF;
 
     RobotDrive drive;
 
-    static void DisableMotor( XCANJaguar& motor );
-    static void EnablePercentVbusControl( XCANJaguar& motor );
-    static void EnableVoltageControl( XCANJaguar& motor );
-    static void EnableSpeedControl( XCANJaguar& motor,
+    static void DisableMotor( CANJaguar& motor );
+    static void EnablePercentVbusControl( CANJaguar& motor );
+    static void EnableVoltageControl( CANJaguar& motor );
+    static void EnableSpeedControl( CANJaguar& motor,
     			double p, double i, double d );
-    static void EnablePositionControl( XCANJaguar& motor,
+    static void EnablePositionControl( CANJaguar& motor,
     			double p, double i, double d );
     unsigned long m_driveTime;
 

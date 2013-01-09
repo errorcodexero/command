@@ -5,13 +5,13 @@
 #define _OI_H_
 
 #include <WPILib.h>
-#include "Smart/Smart.h"
+// #include "Smart/Smart.h"
 
 class OI
 {
 private:
     DriverStationEnhancedIO *pIO;
-    SmartJoystick driverStick;
+    Joystick driverStick;
     JoystickButton button2;
     JoystickButton button3;
     JoystickButton button4;

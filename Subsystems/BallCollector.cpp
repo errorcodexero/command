@@ -9,6 +9,7 @@ BallCollector::BallCollector() :
     m_speed(1.0)
 {
     Disable();
+    pwm.SetSafetyEnabled(false);
 }
     
 // Put methods for controlling this subsystem
@@ -36,19 +37,19 @@ void BallCollector::SetSpeed( float value )
 void BallCollector::RunForward()
 {
     pwm.Set(m_speed);
-    pwm.SetSafetyEnabled(true);
+//    pwm.SetSafetyEnabled(true);
 }
 
 void BallCollector::RunReverse()
 {
     pwm.Set(-m_speed);
-    pwm.SetSafetyEnabled(true);
+//    pwm.SetSafetyEnabled(true);
 }
 
 void BallCollector::Stop()
 {
     pwm.Set(0);
-    pwm.SetSafetyEnabled(false);
+//    pwm.SetSafetyEnabled(false);
 }
 
 void BallCollector::Raise()

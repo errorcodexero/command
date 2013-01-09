@@ -9,7 +9,7 @@
 
 OI::OI() :
 	pIO(NULL),
-	driverStick(DRIVER_STICK, "driver"),
+	driverStick(DRIVER_STICK),
 	button2(&driverStick, 2),
 	button3(&driverStick, 3),
 	button4(&driverStick, 4),

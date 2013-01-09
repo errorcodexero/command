@@ -11,7 +11,8 @@ DumpBalls::DumpBalls() :
 // Called just before this Command runs the first time
 void DumpBalls::Initialize()
 {
-    theBallCollector().Lower();
+    // dump balls without moving the tray
+    // theBallCollector().Lower();
     theBallCollector().SetSpeed(1.0);
 
     DriverStationLCD *lcd = DriverStationLCD::GetInstance();

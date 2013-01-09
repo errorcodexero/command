@@ -33,7 +33,7 @@ private:
     }
 
     virtual void AutonomousContinuous() {
-	taskDelay(0);
+	taskDelay(1);
     }
     
     virtual void TeleopInit() {
@@ -47,7 +47,7 @@ private:
     }
 
     virtual void TeleopContinuous() {
-	taskDelay(0);
+	taskDelay(1);
     }
 
     virtual void DisabledInit() {
@@ -61,7 +61,7 @@ private:
     }
 
     virtual void DisabledContinuous() {
-	taskDelay(0);
+	taskDelay(1);
     }
 
 };

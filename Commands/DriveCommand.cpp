@@ -18,8 +18,8 @@ DriveCommand::DriveCommand() :
 void DriveCommand::Initialize()
 {
     theDriveBase().DisableMotors();
-    // theDriveBase().EnableSpeedControl();
-    theDriveBase().EnableVoltageControl();
+    theDriveBase().EnableSpeedControl();
+    // theDriveBase().EnableVoltageControl();
     m_direction = k_joystick;
     DriverStationLCD *lcd = DriverStationLCD::GetInstance();
     lcd->PrintfLine(DriverStationLCD::kUser_Line1, "joystick");
